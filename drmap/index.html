@@ -64,13 +64,38 @@
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
             map.setCenter(pos);
+            setCurrentPosition(position)
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
         } else {
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
-        }      
+        } 
+				var currentPositionMarker;
+        function setCurrentPosition(pos) {
+                currentPositionMarker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(
+                        pos.coords.latitude,
+                        pos.coords.longitude
+                    ),
+                    title: "Current Position"
+                });
+                map.panTo(new google.maps.LatLng(
+                        pos.coords.latitude,
+                        pos.coords.longitude
+                    ));
+            }
+
+				navigator.geolocation.watchPosition(
+                    function (position) {
+                        setMarkerPosition(
+                            currentPositionMarker,
+                            position
+                        );
+                    });
+
 	}
 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
