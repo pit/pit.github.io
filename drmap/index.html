@@ -5,6 +5,8 @@
 <title>Google Maps - pygmaps </title>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
 <script type="text/javascript">
+// https://developers.google.com/maps/documentation/javascript/examples/style-array?hl=ru
+
 	function initialize() {
 		var centerlatlng = new google.maps.LatLng(55.647627, 37.760832);
 		var myOptions = {
@@ -19,7 +21,7 @@
 		var latlng = new google.maps.LatLng(55.647627, 37.760832);
 		var img = new google.maps.MarkerImage('markers/FF0000.png');
 		var marker = new google.maps.Marker({
-		title: "(1,2,4)",
+		label: "(1,2,4)",
 		icon: img,
 		position: latlng
 		});
@@ -28,7 +30,7 @@
 		var latlng = new google.maps.LatLng(55.648261, 37.760275);
 		var img = new google.maps.MarkerImage('markers/FF0000.png');
 		var marker = new google.maps.Marker({
-		title: "(2,3,4)",
+		label: "(2,3,4)",
 		icon: img,
 		position: latlng
 		});
@@ -37,7 +39,7 @@
 		var latlng = new google.maps.LatLng(55.649116, 37.759151);
 		var img = new google.maps.MarkerImage('markers/FF0000.png');
 		var marker = new google.maps.Marker({
-		title: "(4,1,1)",
+		label: "(4,1,1)",
 		icon: img,
 		position: latlng
 		});
@@ -46,7 +48,7 @@
 		var latlng = new google.maps.LatLng(55.649898, 37.758368);
 		var img = new google.maps.MarkerImage('markers/FF0000.png');
 		var marker = new google.maps.Marker({
-		title: "(1,1,1)",
+		label: "(1,1,1)",
 		icon: img,
 		position: latlng
 		});
@@ -80,7 +82,7 @@
                         pos.coords.latitude,
                         pos.coords.longitude
                     ),
-                    title: "Current Position"
+                    label: "Current Position"
                 });
                 map.panTo(new google.maps.LatLng(
                         pos.coords.latitude,
@@ -112,6 +114,6 @@
 
 	<div id="map"></div>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initialize"></script>
+        src="https://maps.googleapis.com/maps/api/js?callback=initialize"></script>
 </body>
 </html>
