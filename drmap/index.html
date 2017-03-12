@@ -14,8 +14,10 @@
 		};
 		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
+		var infoWindow = new google.maps.InfoWindow({map: map});
+
 		var latlng = new google.maps.LatLng(55.647627, 37.760832);
-		var img = new google.maps.MarkerImage('/Users/peter/Library/Python/2.7/lib/python/site-packages/gmplot/markers/FF0000.png');
+		var img = new google.maps.MarkerImage('markers/FF0000.png');
 		var marker = new google.maps.Marker({
 		title: "(1,2,4)",
 		icon: img,
@@ -24,7 +26,7 @@
 		marker.setMap(map);
 
 		var latlng = new google.maps.LatLng(55.648261, 37.760275);
-		var img = new google.maps.MarkerImage('/Users/peter/Library/Python/2.7/lib/python/site-packages/gmplot/markers/FF0000.png');
+		var img = new google.maps.MarkerImage('markers/FF0000.png');
 		var marker = new google.maps.Marker({
 		title: "(2,3,4)",
 		icon: img,
@@ -33,7 +35,7 @@
 		marker.setMap(map);
 
 		var latlng = new google.maps.LatLng(55.649116, 37.759151);
-		var img = new google.maps.MarkerImage('/Users/peter/Library/Python/2.7/lib/python/site-packages/gmplot/markers/FF0000.png');
+		var img = new google.maps.MarkerImage('markers/FF0000.png');
 		var marker = new google.maps.Marker({
 		title: "(4,1,1)",
 		icon: img,
@@ -42,7 +44,7 @@
 		marker.setMap(map);
 
 		var latlng = new google.maps.LatLng(55.649898, 37.758368);
-		var img = new google.maps.MarkerImage('/Users/peter/Library/Python/2.7/lib/python/site-packages/gmplot/markers/FF0000.png');
+		var img = new google.maps.MarkerImage('markers/FF0000.png');
 		var marker = new google.maps.Marker({
 		title: "(1,1,1)",
 		icon: img,
@@ -50,7 +52,34 @@
 		});
 		marker.setMap(map);
 
+
+// Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }      
 	}
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+
 </script>
 </head>
 <body style="margin:0px; padding:0px;" onload="initialize()">
